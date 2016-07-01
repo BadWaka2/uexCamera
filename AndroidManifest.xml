@@ -44,6 +44,12 @@
             android:label="@string/plugin_camera_title_activity_second"
             android:theme="@android:style/Theme.Holo.Light" >
         </activity>
+
+        <!-- 另一个进程中的图像处理Service -->
+        <service
+            android:name="org.zywx.wbpalmstar.plugin.uexcamera.photoprocess.PhotoProcessService"
+            android:process=":photoprocess" >
+        </service>
     </application>
 
     <uses-permission android:name="android.permission.FLASHLIGHT" />
@@ -57,7 +63,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!-- uexCamera -->
-    
+
+
     <!-- 摄像头权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- 闪光灯权限 -->

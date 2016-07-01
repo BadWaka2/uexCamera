@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import android.util.Log;
+import android.os.Environment;
 
 /**
  * 文件工具类
@@ -15,7 +15,21 @@ import android.util.Log;
  */
 public class FileUtil {
 
-	private static final String TAG = "FileUtil";
+	/**
+	 * 得到根目录
+	 *
+	 * @return
+	 */
+	public static String getRootPath() {
+
+		String rootPath = null;
+
+		// 如果外部储存可用
+		if (Environment.MEDIA_MOUNTED.equals(Environment.MEDIA_MOUNTED) || !Environment.isExternalStorageRemovable()) {
+			rootPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+		}
+		return rootPath;
+	}
 
 	/**
 	 * 得到以日期命名的文件名
@@ -43,10 +57,8 @@ public class FileUtil {
 
 		File file = new File(folderPath);
 		if (!file.exists()) {
-			Log.i(TAG, "【checkFolderPath】	file.exists() == false");
 			return file.mkdirs();
 		}
-		Log.i(TAG, "【checkFolderPath】	file.exists() == true");
 		return true;
 	}
 }
